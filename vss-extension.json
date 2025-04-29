@@ -1,0 +1,65 @@
+{
+  "manifestVersion": 1,
+  "id": "custom-input-extension-haiht",
+  "name": "Custom Input Extension",
+  "publisher": "haiht-vmogroup",
+  "version": "1.0.10",
+  "description": "Custom Input Control for Azure DevOps Work Item Forms",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "categories": [
+    "Azure Boards"
+  ],
+  "files": [
+    {
+      "path": "dist",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "custom-input-extension-haiht",
+      "type": "ms.vss-work-web.work-item-form-control",
+      "description": "Custom Input Field",
+      "targets": [
+        "ms.vss-work-web.work-item-form"
+      ],
+      "properties": {
+        "name": "Custom Input Control",
+        "uri": "dist/index.html",
+        "inputs": [
+          {
+            "id": "Field",
+            "name": "Field",
+            "description": "Select a field for reading and saving value.",
+            "type": "WorkItemField",
+            "properties": {
+              "workItemFieldTypes": [
+                "String",
+                "PlainText",
+                "HTML"
+              ]
+            },
+            "validation": {
+              "dataType": "String",
+              "isRequired": true
+            }
+          },
+          {
+            "id": "Disabled",
+            "name": "Disabled",
+            "description": "Disable the input control.",
+            "type": "boolean",
+            "validation": {
+              "dataType": "Boolean",
+              "isRequired": false
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

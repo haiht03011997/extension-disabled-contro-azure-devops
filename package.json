@@ -1,0 +1,28 @@
+{
+  "name": "azure-devops-custom-input",
+  "version": "1.0.10",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "package": "tfx extension create --manifest-globs vss-extension.json",
+    "devpack": "node bump-version.js && webpack && tfx extension create --manifest-globs vss-extension.json"
+  },
+  "dependencies": {
+    "@fluentui/react": "^8.106.3",
+    "azure-devops-extension-api": "^1.158.0",
+    "azure-devops-extension-sdk": "^4.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.2",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
