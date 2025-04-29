@@ -1,9 +1,9 @@
 {
   "manifestVersion": 1,
-  "id": "custom-input-extension-haiht",
+  "id": "custom-input-extension-disabled",
   "name": "Custom Input Extension",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.10",
+  "version": "1.0.3",
   "description": "Custom Input Control for Azure DevOps Work Item Forms",
   "targets": [
     {
@@ -21,7 +21,7 @@
   ],
   "contributions": [
     {
-      "id": "custom-input-extension-haiht",
+      "id": "custom-input-extension-disabled",
       "type": "ms.vss-work-web.work-item-form-control",
       "description": "Custom Input Field",
       "targets": [
