@@ -2,12 +2,14 @@ import * as React from "react";
 import * as SDK from "azure-devops-extension-sdk";
 import { IWorkItemFormService, WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
 import { getService } from "azure-devops-extension-sdk";
-import { TextField } from "@fluentui/react";
 import "./style.scss";
+import { Input } from "antd";
 
 const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const [fieldName, setFieldName] = React.useState<string>("");
+  const [isDisabled, setDisabled] = React.useState<boolean>(false);
+  const [typeInput, setTypeInput] = React.useState<string>("text");
 
   React.useEffect(() => {
     SDK.init();
@@ -15,8 +17,13 @@ const CustomInput: React.FC = () => {
     SDK.ready().then(async () => {
       const config = SDK.getConfiguration();
       const field = config.witInputs?.Field;
+      const disabledRaw = config.witInputs?.IsDisabled;
+      const disabled = disabledRaw === true || disabledRaw === "true"; // Chuyển đúng kiểu
+      setDisabled(disabled);
+      const type = config.witInputs?.TypeInput;
+      setDisabled(disabled)
       setFieldName(field);
-
+      setTypeInput(type);
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       const fieldValue = await formService.getFieldValue(field);
       const valueStr = fieldValue as string;
@@ -36,7 +43,8 @@ const CustomInput: React.FC = () => {
       });
   }, []);
 
-  const handleChange = async (_: any, newValue?: string) => {
+  const handleChange = async (e?: any) => {
+    const newValue = e?.target?.value ?? e;
     setValue(newValue ?? "");
 
     if (fieldName) {
@@ -46,15 +54,15 @@ const CustomInput: React.FC = () => {
   };
 
   return (
-    <div>
-      <TextField
-        value={value}
-        title={value}
-        onChange={handleChange}
-        disabled={true}
-        className="w-100"
-      />
-    </div>
+    <Input
+      value={value}
+      title={value}
+      onChange={handleChange}
+      placeholder="Nhập giá trị"
+      disabled={isDisabled}
+      type={typeInput}
+      className="w-100"
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "azure-devops-custom-input",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
@@ -9,7 +9,7 @@
     "devpack": "node bump-version.js && webpack && tfx extension create --manifest-globs vss-extension.json"
   },
   "dependencies": {
-    "@fluentui/react": "^8.106.3",
+    "antd": "^5.24.9",
     "azure-devops-extension-api": "^1.158.0",
     "azure-devops-extension-sdk": "^4.0.2",
     "react": "^18.2.0",
