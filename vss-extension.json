@@ -40,22 +40,13 @@
               "workItemFieldTypes": [
                 "String",
                 "PlainText",
-                "HTML"
+                "HTML",
+                "Integer"
               ]
             },
             "validation": {
               "dataType": "String",
               "isRequired": true
-            }
-          },
-          {
-            "id": "Disabled",
-            "name": "Disabled",
-            "description": "Disable the input control.",
-            "type": "boolean",
-            "validation": {
-              "dataType": "Boolean",
-              "isRequired": false
             }
           }
         ]
