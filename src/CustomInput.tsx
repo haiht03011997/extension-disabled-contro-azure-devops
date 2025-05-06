@@ -9,7 +9,6 @@ const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const [fieldName, setFieldName] = React.useState<string>("");
   const [isDisabled, setDisabled] = React.useState<boolean>(false);
-  const [typeInput, setTypeInput] = React.useState<string>("text");
 
   React.useEffect(() => {
     SDK.init();
@@ -20,10 +19,8 @@ const CustomInput: React.FC = () => {
       const disabledRaw = config.witInputs?.IsDisabled;
       const disabled = disabledRaw === true || disabledRaw === "true"; // Chuyển đúng kiểu
       setDisabled(disabled);
-      const type = config.witInputs?.TypeInput;
       setDisabled(disabled)
       setFieldName(field);
-      setTypeInput(type);
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       const fieldValue = await formService.getFieldValue(field);
       const valueStr = fieldValue as string;
@@ -60,7 +57,6 @@ const CustomInput: React.FC = () => {
       onChange={handleChange}
       placeholder="Nhập giá trị"
       disabled={isDisabled}
-      type={typeInput}
       className="w-100"
     />
   );

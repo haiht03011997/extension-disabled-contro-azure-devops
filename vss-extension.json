@@ -3,7 +3,7 @@
   "id": "custom-input-extension-disabled",
   "name": "Custom Input Extension",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "Custom Input Control for Azure DevOps Work Item Forms",
   "targets": [
     {
@@ -54,16 +54,6 @@
             "name": "IsDisabled",
             "description": "Disable the input field.",
             "type": "boolean",
-            "validation": {
-              "isRequired": false
-            }
-          },
-          {
-            "id": "TypeInput",
-            "name": "TypeInput",
-            "description": "Disable the input field.",
-            "type": "String",
-            "defaultValue": "text",
             "validation": {
               "isRequired": false
             }
