@@ -1,9 +1,9 @@
 {
   "manifestVersion": 1,
-  "id": "custom-input-extension-disabled",
-  "name": "Custom Input Extension",
+  "id": "custom-input-number-extension-disabled",
+  "name": "Custom Input Number Extension",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.7",
+  "version": "1.0.1",
   "description": "Custom Input Control for Azure DevOps Work Item Forms",
   "targets": [
     {
@@ -21,14 +21,14 @@
   ],
   "contributions": [
     {
-      "id": "custom-input-extension-disabled",
+      "id": "custom-input-number-extension-disabled",
       "type": "ms.vss-work-web.work-item-form-control",
-      "description": "Custom Input Field",
+      "description": "Custom Input Number Field",
       "targets": [
         "ms.vss-work-web.work-item-form"
       ],
       "properties": {
-        "name": "Custom Input Control",
+        "name": "Custom Input Number Control",
         "uri": "dist/index.html",
         "inputs": [
           {
@@ -50,20 +50,22 @@
             }
           },
           {
-            "id": "IsDisabled",
-            "name": "IsDisabled",
-            "description": "Disable the input field.",
-            "type": "boolean",
+            "id": "MinValue",
+            "name": "MinValue",
+            "type": "Integer",
+            "description": "Minimum value of the input field.",
+            "properties": {
+              "defaultValue": 0
+            },
             "validation": {
               "isRequired": false
             }
           },
           {
-            "id": "TypeInput",
-            "name": "TypeInput",
+            "id": "IsDisabled",
+            "name": "IsDisabled",
             "description": "Disable the input field.",
-            "type": "String",
-            "defaultValue": "text",
+            "type": "boolean",
             "validation": {
               "isRequired": false
             }

@@ -1,15 +1,15 @@
-import * as React from "react";
-import * as SDK from "azure-devops-extension-sdk";
+import { InputNumber } from "antd";
 import { IWorkItemFormService, WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
+import * as SDK from "azure-devops-extension-sdk";
 import { getService } from "azure-devops-extension-sdk";
+import * as React from "react";
 import "./style.scss";
-import { Input } from "antd";
 
 const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const [fieldName, setFieldName] = React.useState<string>("");
   const [isDisabled, setDisabled] = React.useState<boolean>(false);
-  const [typeInput, setTypeInput] = React.useState<string>("text");
+  const [min, setMin] = React.useState<number>(0);
 
   React.useEffect(() => {
     SDK.init();
@@ -20,10 +20,12 @@ const CustomInput: React.FC = () => {
       const disabledRaw = config.witInputs?.IsDisabled;
       const disabled = disabledRaw === true || disabledRaw === "true"; // Chuyển đúng kiểu
       setDisabled(disabled);
-      const type = config.witInputs?.TypeInput;
-      setDisabled(disabled)
+
+      const minValueRaw = config.witInputs?.MinValue;
+      const minValue = minValueRaw ? parseInt(minValueRaw) : 0; // Chuyển đổi sang số nguyên
+      setMin(minValue);
+
       setFieldName(field);
-      setTypeInput(type);
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       const fieldValue = await formService.getFieldValue(field);
       const valueStr = fieldValue as string;
@@ -54,13 +56,13 @@ const CustomInput: React.FC = () => {
   };
 
   return (
-    <Input
+    <InputNumber
       value={value}
       title={value}
+      min={min}
       onChange={handleChange}
       placeholder="Nhập giá trị"
       disabled={isDisabled}
-      type={typeInput}
       className="w-100"
     />
   );
