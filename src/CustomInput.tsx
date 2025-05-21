@@ -16,10 +16,22 @@ const CustomInput: React.FC = () => {
 
     SDK.ready().then(async () => {
       const config = SDK.getConfiguration();
+      // ✅ Đăng ký onFieldChanged
+      SDK.register(SDK.getContributionId(), {
+        onLoaded: async () => {
+          const formService = await getService<IWorkItemFormService>(
+            WorkItemTrackingServiceIds.WorkItemFormService
+          );
+          const initialState : string = await formService.getFieldValue("System.State") as string;
+          const normalized = String(initialState ?? "").toLowerCase();
+          const disabledRaw = config.witInputs?.IsDisabled;
+          const configDisabled = disabledRaw === true || disabledRaw === "true";
+
+          const finalDisabled = (normalized === "hoàn thành" || normalized === "đã duyệt") ? true : configDisabled;
+          setDisabled(finalDisabled);
+        },
+      });
       const field = config.witInputs?.Field;
-      const disabledRaw = config.witInputs?.IsDisabled;
-      const disabled = disabledRaw === true || disabledRaw === "true"; // Chuyển đúng kiểu
-      setDisabled(disabled);
 
       const minValueRaw = config.witInputs?.MinValue;
       const minValue = minValueRaw ? parseInt(minValueRaw) : 0; // Chuyển đổi sang số nguyên
@@ -62,7 +74,7 @@ const CustomInput: React.FC = () => {
       min={min ?? undefined}
       onChange={handleChange}
       placeholder="Nhập giá trị"
-      readOnly={isDisabled}
+      disabled={isDisabled}
       className="w-100"
     />
   );

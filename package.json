@@ -1,6 +1,6 @@
 {
   "name": "azure-devops-custom-input",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
