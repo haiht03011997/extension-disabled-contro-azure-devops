@@ -59,10 +59,10 @@ const CustomInput: React.FC = () => {
     <InputNumber
       value={value}
       title={value}
-      min={min}
+      min={min ?? undefined}
       onChange={handleChange}
       placeholder="Nhập giá trị"
-      disabled={isDisabled}
+      readOnly={isDisabled}
       className="w-100"
     />
   );
