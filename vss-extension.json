@@ -3,7 +3,7 @@
   "id": "custom-input-extension-disabled",
   "name": "Custom Input Extension",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "description": "Custom Input Control for Azure DevOps Work Item Forms",
   "targets": [
     {

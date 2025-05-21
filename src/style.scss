@@ -1,6 +1,7 @@
 body {
     margin: 0;
 }
+
 .ant-input {
     border: none !important;
     box-shadow: none !important;
@@ -14,4 +15,8 @@ body {
         border: 1px solid #1890ff !important; // Màu xanh mặc định của Ant Design
         box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2); // Hiệu ứng focus nhẹ
     }
+}
+
+input[disabled] {
+    background-color: #fff !important;
 }

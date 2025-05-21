@@ -56,7 +56,7 @@ const CustomInput: React.FC = () => {
       title={value}
       onChange={handleChange}
       placeholder="Nhập giá trị"
-      readOnly={isDisabled}
+      disabled={isDisabled}
       className="w-100"
     />
   );
