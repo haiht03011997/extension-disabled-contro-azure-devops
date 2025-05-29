@@ -1,6 +1,6 @@
 {
   "name": "azure-devops-custom-input-show-hide",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
