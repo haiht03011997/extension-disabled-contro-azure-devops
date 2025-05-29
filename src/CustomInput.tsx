@@ -9,35 +9,52 @@ const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const [fieldName, setFieldName] = React.useState<string>("");
   const [isDisabled, setDisabled] = React.useState<boolean>(false);
+  const [isShow, setShow] = React.useState<boolean>(false);
+  const formServiceRef = React.useRef<IWorkItemFormService | null>(null);
 
   React.useEffect(() => {
     SDK.init();
 
     SDK.ready().then(async () => {
       const config = SDK.getConfiguration();
+      // ✅ Đăng ký onFieldChanged
+      SDK.register(SDK.getContributionId(), {
+        onFieldChanged: async (args: any) => {
+          const changed = args.changedFields;
+          const formService = formServiceRef.current;
+
+          if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
+            console.log("Field changed input");
+            setShow(true);
+          }
+        },
+        onLoaded: async () => {
+          const formService = await getService<IWorkItemFormService>(
+            WorkItemTrackingServiceIds.WorkItemFormService
+          );
+          const initialState : string = await formService.getFieldValue("System.State") as string;
+          const normalized = String(initialState ?? "").toLowerCase();
+          const disabledRaw = config.witInputs?.IsDisabled;
+          const configDisabled = disabledRaw === true || disabledRaw === "true";
+
+          const finalDisabled = normalized === "hoàn thành" ? true : configDisabled;
+          setDisabled(finalDisabled);
+        },
+      });
+
       const field = config.witInputs?.Field;
-      const disabledRaw = config.witInputs?.IsDisabled;
-      const disabled = disabledRaw === true || disabledRaw === "true"; // Chuyển đúng kiểu
-      setDisabled(disabled);
-      setDisabled(disabled)
       setFieldName(field);
-      const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
-      const fieldValue = await formService.getFieldValue(field);
-      const valueStr = fieldValue as string;
+
+      const formService = await getService<IWorkItemFormService>(
+        WorkItemTrackingServiceIds.WorkItemFormService
+      );
+      // Lấy giá trị ban đầu
+      const rawValue = await formService.getFieldValue(field);
+      const valueStr = rawValue as string;
       setValue(valueStr);
 
-      let height = 32; // Chiều cao mặc định
-      // Tính chiều cao động theo số dòng
-      if(valueStr && valueStr.length > 0)
-      {
-        const lineHeight = 24;
-        const padding = 12;
-        const lineCount = (valueStr.match(/\n/g)?.length ?? 0) + 1;
-        height = lineCount * lineHeight + padding;
-      }
-
-      SDK.resize(undefined, height);
-      });
+      SDK.resize(undefined, 40);
+    });
   }, []);
 
   const handleChange = async (e?: any) => {
@@ -51,13 +68,13 @@ const CustomInput: React.FC = () => {
   };
 
   return (
+    isShow &&
     <Input
       value={value}
       title={value}
       onChange={handleChange}
       placeholder="Nhập giá trị"
       disabled={isDisabled}
-      className="w-100"
     />
   );
 };

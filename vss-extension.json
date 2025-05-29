@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "id": "custom-input-extension-disabled",
-  "name": "Custom Input Extension",
+  "id": "custom-input-extension-show-hide",
+  "name": "Custom Input Extension With Show/Hide",
   "publisher": "haiht-vmogroup",
-  "version": "1.1.0",
-  "description": "Custom Input Control for Azure DevOps Work Item Forms",
+  "version": "1.1.1",
+  "description": "Custom Input Control With Show/Hide for Azure DevOps Work Item Forms",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
@@ -21,9 +21,9 @@
   ],
   "contributions": [
     {
-      "id": "custom-input-extension-disabled",
+      "id": "custom-input-extension-show-hide",
       "type": "ms.vss-work-web.work-item-form-control",
-      "description": "Custom Input Field",
+      "description": "Custom Input Field With Show/Hide",
       "targets": [
         "ms.vss-work-web.work-item-form"
       ],
@@ -38,10 +38,7 @@
             "type": "WorkItemField",
             "properties": {
               "workItemFieldTypes": [
-                "String",
-                "PlainText",
-                "HTML",
-                "Integer"
+                "String"
               ]
             },
             "validation": {
