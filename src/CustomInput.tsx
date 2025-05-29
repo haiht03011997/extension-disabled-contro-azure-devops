@@ -61,6 +61,15 @@ const CustomInput: React.FC = () => {
               }
             }
           }
+        },
+        onLoaded: async () => {
+          const formService = await getService<IWorkItemFormService>(
+            WorkItemTrackingServiceIds.WorkItemFormService
+          );
+          if (formService) {
+            const initialValue = await formService.getFieldValue(field) as string;
+            setValue(initialValue ?? "");
+          }
         }
       });
 
