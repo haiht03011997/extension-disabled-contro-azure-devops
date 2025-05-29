@@ -47,6 +47,12 @@ const CustomInput: React.FC = () => {
 
           const finalDisabled = normalized === "hoàn thành" ? true : configDisabled;
           setDisabled(finalDisabled);
+
+          const initialContractor : string = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
+          if(initialContractor.toLowerCase() !== "CBNV".toLowerCase())
+            setShow(true);
+          else
+            setShow(false);
         },
       });
 
