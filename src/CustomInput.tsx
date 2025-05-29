@@ -31,16 +31,10 @@ const CustomInput: React.FC = () => {
           {
             if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
               const currentValue = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
-              if( currentValue.toLowerCase() !== "CBNV".toLowerCase()) 
-                {
+              if( currentValue.toLowerCase() === "CBNV".toLowerCase()) 
                   setShow(true);
-                  SDK.resize(undefined, 55);
-                }
               else
-                {
                   setShow(false);
-                  SDK.resize(undefined, 0);
-                }
             }
           }
         },
