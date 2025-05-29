@@ -1,11 +1,9 @@
-import { InputNumber } from "antd";
+import { Input } from "antd";
 import { IWorkItemFormService, WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
 import * as SDK from "azure-devops-extension-sdk";
 import { getService } from "azure-devops-extension-sdk";
 import * as React from "react";
 import "./style.scss";
-
-const formatter = new Intl.NumberFormat('en-US').format;
 
 const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
@@ -32,15 +30,9 @@ const CustomInput: React.FC = () => {
             if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
               const currentValue = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
               if( currentValue.toLowerCase() !== "CBNV".toLowerCase()) 
-                {
                   setShow(true);
-                  SDK.resize(undefined, 55);
-                }
               else
-                {
                   setShow(false);
-                  SDK.resize(undefined, 0);
-                }
             }
           }
         },
@@ -82,6 +74,11 @@ const CustomInput: React.FC = () => {
     if (fieldName) {
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       await formService.setFieldValue(fieldName, newValue ?? "");
+      if(newValue) {
+        await formService.clearError();
+      }
+      else
+        await formService.setError(`Trường ${label} là bắt buộc.`);
     }
   };
 
@@ -89,14 +86,11 @@ const CustomInput: React.FC = () => {
     isShow &&
     (
       <div className="custom-input-container">
-        <label>{label}</label>
-        <InputNumber
+        <label className={`${(value && value.length > 0) ? '' : 'text-error'}`}>{label}</label>
+        <Input
           value={value}
           title={value}
-          min={0}
           onChange={handleChange}
-          formatter={(value) => `${formatter(Number(value || 0))}`}
-          parser={(value) => value?.replace(/,/g, '')}
           placeholder="Nhập giá trị"
           disabled={isDisabled}
         />

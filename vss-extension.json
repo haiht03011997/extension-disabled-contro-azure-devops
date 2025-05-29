@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "id": "custom-input-number-extension-show-hide-special-type-contractor",
-  "name": "Custom Input Number Extension With Show/Hide for contractor",
+  "id": "custom-input-extension-show-hide-special-type-contractor",
+  "name": "Custom Input Extension With Show/Hide for contractor",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.1",
-  "description": "Custom Input Number Control With Show/Hide for contractor in Azure DevOps Work Item Forms",
+  "version": "1.0.7",
+  "description": "Custom Input Control With Show/Hide for contractor in Azure DevOps Work Item Forms",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
@@ -21,14 +21,14 @@
   ],
   "contributions": [
     {
-      "id": "custom-input-number-extension-show-hide-special-type-contractor",
+      "id": "custom-input-extension-show-hide-special-type-contractor",
       "type": "ms.vss-work-web.work-item-form-control",
-      "description": "Custom Input Number Field With Show/Hide for contractor",
+      "description": "Custom Input Field With Show/Hide for contractor",
       "targets": [
         "ms.vss-work-web.work-item-form"
       ],
       "properties": {
-        "name": "Custom Input Number Control With Show/Hide for contractor",
+        "name": "Custom Input Control With Show/Hide for contractor",
         "uri": "dist/index.html",
         "inputs": [
           {
