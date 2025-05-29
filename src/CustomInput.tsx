@@ -8,24 +8,32 @@ import { Input } from "antd";
 const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
   const [fieldName, setFieldName] = React.useState<string>("");
+  const [label, setLabel] = React.useState<string>("");
   const [isDisabled, setDisabled] = React.useState<boolean>(false);
   const [isShow, setShow] = React.useState<boolean>(false);
-  const formServiceRef = React.useRef<IWorkItemFormService | null>(null);
 
   React.useEffect(() => {
     SDK.init();
 
     SDK.ready().then(async () => {
       const config = SDK.getConfiguration();
+      
       // ✅ Đăng ký onFieldChanged
       SDK.register(SDK.getContributionId(), {
         onFieldChanged: async (args: any) => {
           const changed = args.changedFields;
-          const formService = formServiceRef.current;
-
-          if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
-            console.log("Field changed input");
-            setShow(true);
+          const formService = await getService<IWorkItemFormService>(
+            WorkItemTrackingServiceIds.WorkItemFormService
+          );
+          if(formService)
+          {
+            if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
+              const currentValue = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
+              if( currentValue.toLowerCase() === "CBNV".toLowerCase()) 
+                setShow(true);
+              else
+                setShow(false);
+            }
           }
         },
         onLoaded: async () => {
@@ -44,7 +52,9 @@ const CustomInput: React.FC = () => {
 
       const field = config.witInputs?.Field;
       setFieldName(field);
-
+      
+      const label = config.witInputs?.Label;
+      setLabel(label);
       const formService = await getService<IWorkItemFormService>(
         WorkItemTrackingServiceIds.WorkItemFormService
       );
@@ -53,7 +63,7 @@ const CustomInput: React.FC = () => {
       const valueStr = rawValue as string;
       setValue(valueStr);
 
-      SDK.resize(undefined, 40);
+      SDK.resize(undefined, 55);
     });
   }, []);
 
@@ -64,18 +74,27 @@ const CustomInput: React.FC = () => {
     if (fieldName) {
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       await formService.setFieldValue(fieldName, newValue ?? "");
+      if(newValue && newValue.length > 0) 
+        await formService.clearError();
+      else
+        await formService.setError(`Trường ${label} là bắt buộc.`);
     }
   };
 
   return (
     isShow &&
-    <Input
-      value={value}
-      title={value}
-      onChange={handleChange}
-      placeholder="Nhập giá trị"
-      disabled={isDisabled}
-    />
+    (
+      <div className="custom-input-container">
+        <label className={`${value ? '' : 'text-error'}`}>{label}</label>
+        <Input
+          value={value}
+          title={value}
+          onChange={handleChange}
+          placeholder="Nhập giá trị"
+          disabled={isDisabled}
+        />
+      </div>
+    )
   );
 };
 

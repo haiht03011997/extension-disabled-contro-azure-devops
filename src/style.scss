@@ -3,7 +3,7 @@ body {
 }
 
 .ant-input {
-    width: 100% !important;
+    width: 99% !important;
     border: none !important;
     box-shadow: none !important;
     transition: border 0.2s ease, box-shadow 0.2s ease;
@@ -20,4 +20,22 @@ body {
 
 input[disabled] {
     background-color: #fff !important;
+}
+
+.custom-input-container {
+    label {
+        font-size: 13px;
+        color: #0000008c;
+        font-family: "Segoe UI VSS (Regular)","Segoe UI","-apple-system",BlinkMacSystemFont,Roboto,"Helvetica Neue",Helvetica,Ubuntu,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    }
+}
+.text-error {
+    &::after{
+        content: "\FE57";
+        color: white;
+        background: #da0a00;
+        border-radius: 50%;
+        margin: 0 4px;
+        font-size: 9px;
+    }
 }

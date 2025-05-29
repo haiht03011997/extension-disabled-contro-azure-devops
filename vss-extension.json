@@ -3,7 +3,7 @@
   "id": "custom-input-extension-show-hide",
   "name": "Custom Input Extension With Show/Hide",
   "publisher": "haiht-vmogroup",
-  "version": "1.1.1",
+  "version": "1.2.4",
   "description": "Custom Input Control With Show/Hide for Azure DevOps Work Item Forms",
   "targets": [
     {
@@ -31,6 +31,20 @@
         "name": "Custom Input Control",
         "uri": "dist/index.html",
         "inputs": [
+          {
+            "id": "Label",
+            "name": "Label",
+            "type": "String",
+            "properties": {
+              "workItemFieldTypes": [
+                "String"
+              ]
+            },
+            "validation": {
+              "dataType": "String",
+              "isRequired": true
+            }
+          },
           {
             "id": "Field",
             "name": "Field",
