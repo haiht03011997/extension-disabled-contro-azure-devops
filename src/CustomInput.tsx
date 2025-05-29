@@ -49,6 +49,11 @@ const CustomInput: React.FC = () => {
             WorkItemTrackingServiceIds.WorkItemFormService
           );
           const initialState : string = await formService.getFieldValue("System.State") as string;
+          const initialContractor : string = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
+          if(initialContractor.toLowerCase() !== "CBNV".toLowerCase())
+            setShow(true);
+          else
+            setShow(false);
           const normalized = String(initialState ?? "").toLowerCase();
           const disabledRaw = config.witInputs?.IsDisabled;
           const configDisabled = disabledRaw === true || disabledRaw === "true";

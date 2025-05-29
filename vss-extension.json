@@ -3,7 +3,7 @@
   "id": "custom-input-number-extension-show-hide-special-type-contractor",
   "name": "Custom Input Number Extension With Show/Hide for contractor",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Custom Input Number Control With Show/Hide for contractor in Azure DevOps Work Item Forms",
   "targets": [
     {

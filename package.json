@@ -1,6 +1,6 @@
 {
   "name": "azure-devops-custom-input-number-show-hide-special-type-contractor",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
