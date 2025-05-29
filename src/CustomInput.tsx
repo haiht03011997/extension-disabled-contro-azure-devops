@@ -1,9 +1,11 @@
-import * as React from "react";
-import * as SDK from "azure-devops-extension-sdk";
+import { InputNumber } from "antd";
 import { IWorkItemFormService, WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
+import * as SDK from "azure-devops-extension-sdk";
 import { getService } from "azure-devops-extension-sdk";
+import * as React from "react";
 import "./style.scss";
-import { Input } from "antd";
+
+const formatter = new Intl.NumberFormat('en-US').format;
 
 const CustomInput: React.FC = () => {
   const [value, setValue] = React.useState<string>("");
@@ -29,10 +31,16 @@ const CustomInput: React.FC = () => {
           {
             if (changed["Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0"]) {
               const currentValue = await formService.getFieldValue("Custom.a2a2331d-644d-479d-b7fa-42698a4a8af0") as string;
-              if( currentValue.toLowerCase() === "CBNV".toLowerCase()) 
-                setShow(true);
+              if( currentValue.toLowerCase() !== "CBNV".toLowerCase()) 
+                {
+                  setShow(true);
+                  SDK.resize(undefined, 55);
+                }
               else
-                setShow(false);
+                {
+                  setShow(false);
+                  SDK.resize(undefined, 0);
+                }
             }
           }
         },
@@ -74,10 +82,6 @@ const CustomInput: React.FC = () => {
     if (fieldName) {
       const formService = await getService<IWorkItemFormService>(WorkItemTrackingServiceIds.WorkItemFormService);
       await formService.setFieldValue(fieldName, newValue ?? "");
-      if(newValue && newValue.length > 0) 
-        await formService.clearError();
-      else
-        await formService.setError(`Trường ${label} là bắt buộc.`);
     }
   };
 
@@ -85,11 +89,14 @@ const CustomInput: React.FC = () => {
     isShow &&
     (
       <div className="custom-input-container">
-        <label className={`${value ? '' : 'text-error'}`}>{label}</label>
-        <Input
+        <label>{label}</label>
+        <InputNumber
           value={value}
           title={value}
+          min={0}
           onChange={handleChange}
+          formatter={(value) => `${formatter(Number(value || 0))}`}
+          parser={(value) => value?.replace(/,/g, '')}
           placeholder="Nhập giá trị"
           disabled={isDisabled}
         />

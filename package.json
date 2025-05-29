@@ -1,6 +1,6 @@
 {
-  "name": "azure-devops-custom-input-show-hide",
-  "version": "1.2.4",
+  "name": "azure-devops-custom-input-show-hide-special-type-contractor",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
