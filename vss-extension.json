@@ -3,7 +3,7 @@
   "id": "custom-input-number-extension-show-hide-special-type",
   "name": "Custom Input Number Extension With Show/Hide ",
   "publisher": "haiht-vmogroup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Custom Input Number Control With Show/Hide  in Azure DevOps Work Item Forms",
   "targets": [
     {
