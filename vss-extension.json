@@ -3,7 +3,7 @@
   "id": "azure-devops-custom-input-info-parent-disabled-extension",
   "name": "Custom Input Infor Parent Extension",
   "publisher": "haiht-vmogroup",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Custom Input Control Infor Parent for Azure DevOps Work Item Forms",
   "targets": [
     {

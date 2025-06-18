@@ -42,10 +42,11 @@ const CustomInput: React.FC = () => {
                 const parent = await handleGetInforParent(parrentId);
                 let newValue: any;
 
-                if (field === "Custom.83cc03ff-b4cd-4863-9fbf-254247a6d8cf") {
-                  newValue = parent["System.AssignedTo"]["uniqueName"];
-                }
-                else if (field === "Custom.AreaPath") {
+                // if (field === "Custom.83cc03ff-b4cd-4863-9fbf-254247a6d8cf") {
+                //   newValue = parent["System.AssignedTo"]["uniqueName"];
+                // }
+                // else 
+                if (field === "Custom.AreaPath") {
                   await formService.setFieldValue("System.AreaPath", parent["System.AreaPath"]);
                   newValue = parent[field];
                 }
